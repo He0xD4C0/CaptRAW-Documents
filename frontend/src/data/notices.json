@@ -1,0 +1,104 @@
+[
+  {
+    "id": 1,
+    "title": "系统维护通知",
+    "content": "为了提供更好的服务，我们将在本周六凌晨2:00-4:00进行系统维护。在此期间，网站可能会暂时无法访问。请提前安排好您的工作，感谢您的理解与支持。",
+    "author": {
+      "id": "admin",
+      "name": "管理员",
+      "avatar": "notice_1_author_avatar"
+    },
+    "createdAt": "2026-03-29 10:30",
+    "expiresAt": "2026-04-05",
+    "link": "/notices/system-maintenance",
+    "priority": "high",
+    "category": "system"
+  },
+  {
+    "id": 2,
+    "title": "新功能上线",
+    "content": "我们新增了文章投稿功能，欢迎大家积极投稿分享知识！投稿功能支持Markdown编辑、图片上传、标签分类等功能。优秀文章将有机会被推荐到首页。",
+    "author": {
+      "id": "he0xd4c0",
+      "name": "He0xD4C0",
+      "avatar": "notice_2_author_avatar"
+    },
+    "createdAt": "2026-03-28 14:20",
+    "link": "/notices/new-feature",
+    "priority": "medium",
+    "category": "feature"
+  },
+  {
+    "id": 3,
+    "title": "社区规则更新",
+    "content": "为了维护良好的社区环境，我们更新了社区规则，请各位用户仔细阅读。主要更新内容包括：内容审核标准、用户行为规范、版权保护政策等。",
+    "author": {
+      "id": "moderator",
+      "name": "版主",
+      "avatar": "notice_3_author_avatar"
+    },
+    "createdAt": "2026-03-27 09:15",
+    "expiresAt": "2026-12-31",
+    "link": "/notices/community-rules",
+    "priority": "high",
+    "category": "policy"
+  },
+  {
+    "id": 4,
+    "title": "征文活动开始",
+    "content": "第一届技术征文活动正式开始，优秀作品将获得奖励！活动主题：'前端开发的最佳实践'，投稿截止日期：2026年4月30日。",
+    "author": {
+      "id": "organizer",
+      "name": "活动组织者",
+      "avatar": "notice_4_author_avatar"
+    },
+    "createdAt": "2026-03-26 16:45",
+    "expiresAt": "2026-04-30",
+    "link": "/notices/writing-contest",
+    "priority": "medium",
+    "category": "event"
+  },
+  {
+    "id": 5,
+    "title": "API接口更新",
+    "content": "我们对API接口进行了优化，详情请查看更新日志。主要更新：新增文章搜索接口、优化分页参数、增强错误处理机制。",
+    "author": {
+      "id": "developer",
+      "name": "开发者",
+      "avatar": "notice_5_author_avatar"
+    },
+    "createdAt": "2026-03-25 11:10",
+    "link": "/notices/api-update",
+    "priority": "low",
+    "category": "technical"
+  },
+  {
+    "id": 6,
+    "title": "网站性能优化完成",
+    "content": "我们完成了网站的全面性能优化，包括代码分割、图片懒加载、缓存策略等。现在网站的加载速度提升了40%。",
+    "author": {
+      "id": "performance_team",
+      "name": "性能优化团队",
+      "avatar": "notice_6_author_avatar"
+    },
+    "createdAt": "2026-03-24 15:30",
+    "link": "/notices/performance-optimization",
+    "priority": "medium",
+    "category": "technical"
+  },
+  {
+    "id": 7,
+    "title": "用户反馈渠道开通",
+    "content": "我们开通了新的用户反馈渠道，欢迎大家对网站功能、用户体验等方面提出宝贵意见。您的反馈将帮助我们不断改进。",
+    "author": {
+      "id": "feedback_team",
+      "name": "用户反馈团队",
+      "avatar": "notice_7_author_avatar"
+    },
+    "createdAt": "2026-03-23 13:45",
+    "expiresAt": "2026-12-31",
+    "link": "/notices/feedback-channel",
+    "priority": "low",
+    "category": "community"
+  }
+]

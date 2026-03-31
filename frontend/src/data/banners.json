@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "title": "欢迎来到CaptRAW Documents",
+    "subtitle": "一个专注于技术分享和文档管理的社区",
+    "image": "banner_1_image",
+    "link": "/welcome",
+    "type": "notice",
+    "description": "加入我们的技术社区，分享知识，共同成长",
+    "order": 1,
+    "isActive": true,
+    "backgroundColor": "#3b82f6"
+  },
+  {
+    "id": 2,
+    "title": "React最佳实践指南",
+    "subtitle": "学习如何编写高质量的React代码",
+    "image": "banner_2_image",
+    "link": "/articles/react-best-practices",
+    "type": "article",
+    "description": "从基础到高级，全面掌握React开发技巧",
+    "order": 2,
+    "isActive": true,
+    "backgroundColor": "#10b981"
+  },
+  {
+    "id": 3,
+    "title": "Tailwind CSS v4新特性",
+    "subtitle": "探索最新版本的Tailwind CSS",
+    "image": "banner_3_image",
+    "link": "/articles/tailwind-v4",
+    "type": "article",
+    "description": "了解Tailwind CSS v4的新功能和改进",
+    "order": 3,
+    "isActive": true,
+    "backgroundColor": "#8b5cf6"
+  },
+  {
+    "id": 4,
+    "title": "社区用户He0xD4C0",
+    "subtitle": "查看他的最新作品和分享",
+    "image": "banner_4_image",
+    "link": "/u/he0xd4c0",
+    "type": "user",
+    "description": "关注活跃用户，获取最新技术分享",
+    "order": 4,
+    "isActive": true,
+    "backgroundColor": "#f59e0b"
+  },
+  {
+    "id": 5,
+    "title": "TypeScript进阶教程",
+    "subtitle": "掌握高级类型和泛型编程",
+    "image": "banner_5_image",
+    "link": "/articles/typescript-advanced",
+    "type": "article",
+    "description": "深入学习TypeScript的高级特性",
+    "order": 5,
+    "isActive": true,
+    "backgroundColor": "#ef4444"
+  },
+  {
+    "id": 6,
+    "title": "Node.js性能优化",
+    "subtitle": "提升服务器端应用性能",
+    "image": "banner_6_image",
+    "link": "/articles/nodejs-performance",
+    "type": "article",
+    "description": "学习Node.js应用的性能优化技巧",
+    "order": 6,
+    "isActive": true,
+    "backgroundColor": "#06b6d4"
+  }
+]

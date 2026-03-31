@@ -1,0 +1,33 @@
+api:
+  # 后端基础配置
+  baseUrl: "http://localhost:3001/api"
+
+assets:
+  # 资源解析策略：signedUrl 走后端签名接口；publicPrefix 直接拼接 publicBaseUrl
+  strategy: "signedUrl"
+  # 占位图基础 URL（mock 签名或兜底时使用）
+  publicBaseUrl: "https://via.placeholder.com"
+  sign:
+    mode: "mock"
+    expiresSeconds: 300
+  # 后端兼容字段（便于在 config 中快速切换）
+  signMode: "mock"
+
+community:
+  # Misskey / Fediverse 社区地址
+  url: "https://hub.captraw.com"
+
+objectStorage:
+  # 预留给 MinIO / S3 等对象存储（目前前端暂不直接使用）
+  endpoint: "localhost"
+  port: 9000
+  bucket: "Capt-Docs-Storage"
+  accessKey: "Capt-Docs"
+  secretKey: "12345678"
+  region: "us-east-1"
+  secure: false
+
+database:
+  # 仅后端使用；前端不会读取这一节
+  url: "postgresql://user:password@localhost:5432/captraw_docs"
+

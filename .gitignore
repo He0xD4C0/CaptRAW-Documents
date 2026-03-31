@@ -1,0 +1,362 @@
+# ============================================
+# CaptRAW Documents 项目 .gitignore 文件
+# ============================================
+
+# ============ 操作系统文件 ============
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Linux
+*~
+
+# ============ 编辑器/IDE文件 ============
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.vscode/*.code-workspace
+.continue
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# Vim
+*.swp
+*.swo
+*~
+
+# ============ 前端项目 ============
+# 依赖目录
+frontend/node_modules/
+frontend/.pnp
+frontend/.pnp.js
+
+# 构建输出
+frontend/build/
+frontend/dist/
+frontend/out/
+frontend/.next/
+
+# 缓存
+frontend/.npm
+frontend/.eslintcache
+frontend/.stylelintcache
+frontend/.cache/
+frontend/.parcel-cache/
+
+# 日志
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+frontend/lerna-debug.log*
+
+# 运行时数据
+frontend/pids
+frontend/*.pid
+frontend/*.seed
+frontend/*.pid.lock
+
+# 覆盖率目录
+frontend/coverage/
+frontend/.nyc_output
+
+# 生产环境
+frontend/.env.production.local
+frontend/.env.test.local
+frontend/.env.development.local
+
+# 验证缓存
+frontend/.vercel
+
+# ============ 后端项目 ============
+# 依赖目录
+backend/node_modules/
+backend/.pnp
+backend/.pnp.js
+
+# 构建输出
+backend/dist/
+backend/build/
+backend/out/
+
+# 日志
+backend/npm-debug.log*
+backend/yarn-debug.log*
+backend/yarn-error.log*
+backend/pnpm-debug.log*
+
+# 运行时数据
+backend/*.pid
+backend/*.seed
+backend/*.pid.lock
+
+# 覆盖率目录
+backend/coverage/
+backend/.nyc_output
+
+# 数据库
+backend/*.db
+backend/*.sqlite
+backend/*.sqlite3
+
+# ============ 通用开发文件 ============
+# 依赖锁文件（根据团队策略决定是否忽略）
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# 环境变量文件
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 敏感配置文件
+config.yaml  # 根目录配置文件包含敏感信息，不应提交
+secrets/
+credentials/
+*.key
+*.pem
+*.crt
+*.cer
+
+# 临时文件
+*.tmp
+*.temp
+.temp/
+tmp/
+temp/
+
+# 日志文件
+*.log
+logs/
+*.logs
+
+# 调试文件
+debug/
+*.debug
+
+# ============ 测试文件 ============
+# 测试输出
+test-results/
+test-reports/
+*.test-results.xml
+*.test-reports.xml
+
+# 快照测试
+__snapshots__/
+*.snap
+
+# ============ 文档生成 ============
+# 自动生成的文档
+docs/_build/
+docs/_site/
+docs/.jekyll-metadata
+
+# ============ Docker ============
+# Docker相关文件
+docker-compose.override.yml
+.dockerignore
+
+# ============ 数据库 ============
+# 数据库文件
+*.db
+*.sqlite
+*.sqlite3
+*.mdb
+*.accdb
+
+# 数据库迁移文件（通常应该提交，但这里列出可能生成的临时文件）
+migrations/*.tmp
+
+# ============ 上传文件 ============
+# 用户上传的文件
+uploads/
+media/
+static/uploads/
+static/media/
+
+# ============ IDE配置 ============
+# 项目特定的IDE配置
+.project
+.classpath
+.settings/
+
+# ============ 包管理器 ============
+# 包管理器特定文件
+.pnp.cjs
+.pnp.loader.mjs
+.yarn/
+!.yarn/releases
+!.yarn/plugins
+!.yarn/patches
+!.yarn/versions
+.pnp.*
+
+# ============ 其他 ============
+# 压缩文件
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+
+# 二进制文件
+*.exe
+*.dll
+*.so
+*.dylib
+*.class
+
+# 字体文件
+*.ttf
+*.woff
+*.woff2
+*.eot
+*.otf
+
+# 图片文件（通常应该提交，但这里列出可能生成的临时文件）
+*.png.tmp
+*.jpg.tmp
+*.gif.tmp
+
+# ============ 项目特定 ============
+# 前端构建时生成的公共配置（应该由脚本生成）
+frontend/public/config.yaml
+
+# 开发时的临时配置文件
+config.local.yaml
+config.dev.yaml
+
+# 对象存储的本地模拟文件
+mock-storage/
+local-storage/
+
+# ============ 性能分析 ============
+# 性能分析文件
+*.cpuprofile
+*.heapsnapshot
+
+# ============ 安全 ============
+# 安全扫描结果
+security-scan/
+*.security-report
+
+# ============ 备份文件 ============
+# 备份文件
+*.bak
+*.backup
+*.old
+*.orig
+*.save
+
+# ============ 版本控制 ============
+# Git相关
+.git-rewrite/
+.git-blame-ignore-revs
+
+# ============ 语言特定 ============
+# TypeScript
+*.tsbuildinfo
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+
+# ============ 云服务 ============
+# Vercel
+.vercel
+
+# Netlify
+.netlify
+
+# Railway
+.railway
+
+# ============ 监控和日志 ============
+# 应用监控
+sentry.properties
+*.sentry-cli
+
+# ============ 文档 ============
+# 自动生成的API文档
+api-docs/
+swagger.json
+
+# ============ 代码质量 ============
+# 代码质量工具
+.sonarlint/
+.codeclimate.yml
+
+# ============ 持续集成 ============
+# CI/CD配置文件（通常应该提交，但这里列出可能生成的临时文件）
+.github/workflows/*.tmp
+.gitlab-ci.yml.tmp
+
+# ============ 最后 ============
+# 确保不忽略必要的文件
+!package.json
+!README.md
+!LICENSE
+!.gitignore
+!.editorconfig
+!.prettierrc
+!.eslintrc.js
+!tsconfig.json
+!tailwind.config.js
+!postcss.config.js
+
+# 但忽略这些文件的本地覆盖版本
+package.json.local
+README.md.local
+LICENSE.local
