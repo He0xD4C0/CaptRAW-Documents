@@ -1,8 +1,7 @@
 import { Router, Request } from 'express';
 import { AssetKind, getConfig } from './config';
 import { canAccessAsset, findAssetRecord } from './assetRegistry';
-import { buildObjectKey, generateSignedUrl } from './minioClient';
-import { ASSET_MOCK_PATH_MAP } from './assetMockMap';
+import { buildObjectKey, generateSignedUrl } from './storage/s3Client';
 
 interface SignRequestItem {
   kind: AssetKind;
@@ -31,7 +30,7 @@ function parseBatch(req: Request): SignRequestItem[] {
 }
 
 async function signOne(item: SignRequestItem, userId?: string) {
-  const record = findAssetRecord(item.kind, item.uuid);
+  const record = await findAssetRecord(item.kind, item.uuid);
   if (!record) {
     return { kind: item.kind, uuid: item.uuid, error: 'not_found', status: 404 };
   }
@@ -42,17 +41,6 @@ async function signOne(item: SignRequestItem, userId?: string) {
 
   const cfg = getConfig();
   const expires = cfg.assets.sign.expiresSeconds || 300;
-  if (cfg.assets.sign.mode === 'mock') {
-    const path = ASSET_MOCK_PATH_MAP[item.uuid] || item.uuid;
-    const base = cfg.assets.publicBaseUrl.replace(/\/+$/, '');
-    const normalized = path.replace(/^\/+/, '');
-    return {
-      kind: item.kind,
-      uuid: item.uuid,
-      signedUrl: `${base}/${normalized}`,
-      expiresIn: expires,
-    };
-  }
 
   const objectKey = buildObjectKey({
     kind: record.kind,

@@ -25,6 +25,9 @@ export interface BackendConfig {
     region: string;
     secure: boolean;
   };
+  database: {
+    url: string;
+  };
 }
 
 const DEFAULT_CONFIG: BackendConfig = {
@@ -42,11 +45,14 @@ const DEFAULT_CONFIG: BackendConfig = {
   objectStorage: {
     endpoint: 'localhost',
     port: 9000,
-    bucket: 'Capt-Docs-Storage',
+    bucket: 'capt-docs-storage',
     accessKey: 'Capt-Docs',
       secretKey: '12345678',
     region: 'us-east-1',
     secure: false,
+  },
+  database: {
+    url: 'postgresql://captraw_user:captraw_password@localhost:5432/captraw_db',
   },
 };
 
@@ -86,6 +92,9 @@ export function getConfig(): BackendConfig {
         typeof raw?.objectStorage?.secure === 'boolean'
           ? raw.objectStorage.secure
           : DEFAULT_CONFIG.objectStorage.secure,
+    },
+    database: {
+      url: raw?.database?.url || DEFAULT_CONFIG.database.url,
     },
   };
   return cachedConfig;

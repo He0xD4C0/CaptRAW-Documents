@@ -8,20 +8,20 @@ assets:
   # 占位图基础 URL（mock 签名或兜底时使用）
   publicBaseUrl: "https://via.placeholder.com"
   sign:
-    mode: "mock"
+    mode: "real"
     expiresSeconds: 300
   # 后端兼容字段（便于在 config 中快速切换）
-  signMode: "mock"
+  signMode: "real"
 
 community:
   # Misskey / Fediverse 社区地址
   url: "https://hub.captraw.com"
 
 objectStorage:
-  # 预留给 MinIO / S3 等对象存储（目前前端暂不直接使用）
+  # 预留给 MinIO / S3 等对象存储
   endpoint: "localhost"
   port: 9000
-  bucket: "Capt-Docs-Storage"
+  bucket: "capt-docs-storage"
   accessKey: "Capt-Docs"
   secretKey: "12345678"
   region: "us-east-1"

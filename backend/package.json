@@ -6,17 +6,22 @@
   "scripts": {
     "dev": "ts-node src/server.ts",
     "build": "tsc -p tsconfig.json",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "upload-assets": "ts-node scripts/upload-assets.ts",
+    "test-db": "ts-node -e \"import { healthCheck } from './src/database'; healthCheck().then(ok => console.log(ok ? '✅ Database OK' : '❌ Database Failed')).catch(e => console.error(e));\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.1020.0",
+    "@aws-sdk/s3-request-presigner": "^3.1020.0",
+    "@types/pg": "^8.20.0",
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "js-yaml": "^4.1.1",
-    "minio": "^8.0.7"
+    "pg": "^8.20.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",

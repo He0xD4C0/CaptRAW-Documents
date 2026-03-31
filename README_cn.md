@@ -20,8 +20,7 @@
 
 ## 📊 项目状态
 
-**当前版本**: v0.3.0-beta  
-**开发阶段**: 第1阶段 - 前端开发（已完成65%）  
+**开发阶段**: 第1阶段 - 前端开发（已完成75%） + 后端基础架构  
 **最后更新**: 2026年3月31日
 
 ### ✅ 已完成功能
@@ -31,6 +30,8 @@
 3. **主页功能** - 横幅轮播、公告板、文章时间线
 4. **配置系统** - 安全的配置管理和资源统一管理
 5. **数据层** - 完整的API服务和数据管理
+6. **后端基础** - 数据库、对象存储和资产管理
+7. **项目文档** - 完整的模块文档和进度报告
 
 ### 🚧 开发中功能
 
@@ -50,41 +51,51 @@
 - **构建工具**: Create React App 5.0.1
 - **配置管理**: js-yaml 4.1.1
 
-### 后端技术栈（计划中）
-- **运行时**: Node.js + Express
-- **数据库**: PostgreSQL + Prisma ORM
-- **认证**: JWT + bcryptjs
-- **文件存储**: MinIO/S3对象存储
-- **缓存**: Redis
-- **文档**: Swagger/OpenAPI
+### 后端技术栈（部分实现）
+- **运行时**: Node.js + Express 5.2.1
+- **数据库**: PostgreSQL + pg 8.20.0
+- **对象存储**: @aws-sdk/client-s3（S3兼容）
+- **资产管理**: 签名URL生成和资产注册表
+- **数据库操作**: 连接池、事务、CRUD操作
+- **配置管理**: 统一的YAML配置，支持环境变量
 
 ## 📁 项目结构
 
 ```
 CaptRAW-Documents/
-├── frontend/                    # 前端项目
+├── frontend/                    # 前端项目（React + TypeScript + Tailwind）
 │   ├── src/
 │   │   ├── components/         # React组件
-│   │   │   ├── layout/        # 布局组件
-│   │   │   ├── ui/           # UI组件
-│   │   │   ├── home/         # 主页组件
-│   │   │   └── articles/     # 文章组件
-│   │   ├── pages/            # 页面组件
-│   │   ├── hooks/            # React Hooks
-│   │   ├── services/         # API服务
-│   │   ├── config/           # 配置模块
-│   │   ├── data/             # 数据文件
+│   │   │   ├── layout/        # 布局组件（Header、Footer、Layout）
+│   │   │   ├── ui/           # UI组件（AssetImage、ThemeToggle、UserAvatar）
+│   │   │   ├── home/         # 主页组件（BannerCarousel、NoticeBoard、ArticleTimeline）
+│   │   │   └── articles/     # 文章组件（ArticleCard）
+│   │   ├── pages/            # 页面组件（HomePage）
+│   │   ├── hooks/            # React Hooks（useArticles、useAssetUrl等）
+│   │   ├── services/         # API服务（模块化服务架构）
+│   │   ├── config/           # 配置模块（runtimeConfig、urls）
+│   │   ├── data/             # 数据文件（articles、notices、banners JSON）
 │   │   ├── types/            # TypeScript类型定义
-│   │   └── utils/            # 工具函数
+│   │   └── utils/            # 工具函数（assetUrl）
 │   ├── public/               # 静态资源
-│   ├── scripts/              # 构建脚本
+│   ├── scripts/              # 构建脚本（配置同步）
 │   └── package.json          # 依赖配置
-├── backend/                   # 后端项目（计划中）
-├── shared/                    # 共享代码
-├── docs/                      # 项目文档
-├── config.yaml               # 主配置文件
-├── docker-compose.yml        # Docker配置
-└── .gitignore               # Git忽略文件
+├── backend/                    # 后端项目（Node.js + Express + TypeScript）
+│   ├── src/
+│   │   ├── database/          # 数据库模块（PostgreSQL连接池）
+│   │   ├── storage/           # 存储模块（S3兼容客户端）
+│   │   ├── assetRegistry.ts   # 资产注册表（支持数据库回退）
+│   │   ├── assetSignRoute.ts  # 资产签名路由处理器
+│   │   ├── config.ts          # 配置管理
+│   │   └── server.ts          # Express服务器
+│   ├── scripts/                # 工具脚本（资产上传）
+│   ├── init-db.sql            # 数据库初始化脚本
+│   └── package.json            # 依赖配置
+├── Reference/                  # 项目文档和参考资料
+├── scripts/                    # 全局脚本（MinIO初始化）
+├── config.yaml                 # 主配置文件
+├── docker-compose.yml          # Docker配置（PostgreSQL + MinIO）
+└── .gitignore                  # Git忽略文件
 ```
 
 ## 🚀 快速开始
@@ -364,10 +375,12 @@ docker run -p 3000:80 captraw-documents
 
 | 阶段 | 状态 | 完成度 |
 |------|------|--------|
-| 第1阶段：前端开发 | 🟢 进行中 | 65% |
-| 第2阶段：后端开发 | ⚪ 待开始 | 0% |
-| 第3阶段：测试部署 | ⚪ 待开始 | 0% |
-| 第4阶段：文档优化 | ⚪ 待开始 | 0% |
+| 第1阶段：前端开发 | 🟢 进行中 | 75% |
+| 第2阶段：后端基础 | 🟢 进行中 | 70% |
+| 第3阶段：文章系统 | ⚪ 待开始 | 0% |
+| 第4阶段：用户认证 | ⚪ 待开始 | 0% |
+| 第5阶段：管理功能 | ⚪ 待开始 | 0% |
+| 第6阶段：测试部署 | ⚪ 待开始 | 0% |
 
 ### 详细进度
 
@@ -375,9 +388,12 @@ docker run -p 3000:80 captraw-documents
 - ✅ **二阶段**: 布局组件开发 (100%)
 - ✅ **三阶段**: 主页组件开发 (100%)
 - ✅ **四阶段**: 配置系统架构 (100%)
-- 🟡 **五阶段**: 文章页面开发 (进行中)
-- ⚪ **六阶段**: 用户认证系统 (待开始)
-- ⚪ **七阶段**: 管理页面开发 (待开始)
+- ✅ **五阶段**: 数据层和API服务 (100%)
+- ✅ **六阶段**: 项目文档和清理 (100%)
+- 🟡 **七阶段**: 后端基础架构 (70%)
+- ⚪ **八阶段**: 文章页面开发 (待开始)
+- ⚪ **九阶段**: 用户认证系统 (待开始)
+- ⚪ **十阶段**: 管理页面开发 (待开始)
 
 ---
 
