@@ -1,5 +1,4 @@
 import { AssetKind } from './config';
-import { findAssetByUuid } from './database';
 
 interface AssetRecord {
   kind: AssetKind;
@@ -35,26 +34,7 @@ const ASSET_REGISTRY: AssetRecord[] = [
   { kind: 'notice', uuid: 'notice_7_author_avatar', visibility: 'public' },
 ];
 
-export async function findAssetRecord(kind: AssetKind, uuid: string): Promise<AssetRecord | undefined> {
-  // 首先尝试从数据库查询
-  try {
-    const dbRecord = await findAssetByUuid(uuid);
-    if (dbRecord && dbRecord.kind === kind) {
-      return {
-        kind: dbRecord.kind,
-        uuid: dbRecord.uuid,
-        visibility: dbRecord.visibility,
-        ownerId: dbRecord.owner_id || undefined,
-        username: dbRecord.username || undefined,
-        hostname: dbRecord.hostname || undefined,
-      };
-    }
-  } catch (error) {
-    // 如果数据库查询失败，回退到硬编码记录
-    console.warn(`Database query failed for asset ${kind}/${uuid}:`, error);
-  }
-  
-  // 回退到硬编码记录
+export function findAssetRecord(kind: AssetKind, uuid: string): AssetRecord | undefined {
   return ASSET_REGISTRY.find((item) => item.kind === kind && item.uuid === uuid);
 }
 
