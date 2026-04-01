@@ -1,10 +1,8 @@
-Below is a precise English translation of your document, preserving structure and technical intent:
-
----
-
 # CaptRAW Documents
 
 *A modern technical blog and documentation management system focused on knowledge sharing and technical content.*
+
+![CaptRAW Documents Banner](https://github.com/hex-0xd4c0/CaptRAW-Documents/blob/94c4cbcd3801a06c1ed7823977460de62f8d7b57/README_Reference/20260401%E6%95%88%E6%9E%9C%E9%A2%84%E8%A7%88%E5%9B%BE.png)
 
 ---
 
