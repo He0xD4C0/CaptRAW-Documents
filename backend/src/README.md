@@ -1,5 +1,7 @@
 # 后端源代码目录说明
 
+*最后更新：2024年4月*
+
 此目录包含 CaptRAW Documents 后端服务的所有源代码。
 
 ## 目录结构
@@ -9,10 +11,12 @@
 - `config.ts` - 配置管理模块，读取和验证配置文件
 - `assetRegistry.ts` - 资产注册表，管理资产元数据和数据库查询
 - `assetSignRoute.ts` - 资产签名路由，处理资产签名请求
+- `serverInfoRoute.ts` - 服务器信息路由，管理动态配置
 
 ### 模块目录
 - `database/` - 数据库连接和操作
 - `storage/` - 对象存储客户端和操作
+- `services/` - 业务服务层
 
 ## 文件详细说明
 
@@ -79,6 +83,48 @@ interface AppConfig {
 - `GET /api/assets/sign` - 单个资产签名
 - `POST /api/assets/sign` - 批量资产签名
 
+### `serverInfoRoute.ts` - 服务器信息路由
+管理动态服务器配置和信息的 Express 路由。
+
+**主要功能：**
+- 提供服务器信息配置的CRUD操作
+- 同步配置文件到数据库
+- 验证配置完整性
+- 提供运行时配置访问
+
+**路由端点：**
+- `GET /api/server-info` - 获取所有公开的服务器信息
+- `GET /api/server-info/runtime-config` - 获取运行时配置
+- `GET /api/server-info/category/:category` - 按分类获取配置
+- `GET /api/server-info/:key` - 获取单个配置项
+- `POST /api/server-info` - 设置配置项
+- `POST /api/server-info/batch` - 批量设置配置项
+- `DELETE /api/server-info/:key` - 删除配置项
+- `POST /api/server-info/sync` - 同步配置文件到数据库
+- `GET /api/server-info/validate` - 验证配置完整性
+
+### `services/serverInfoService.ts` - 服务器信息服务
+服务器信息配置的业务逻辑层。
+
+**主要功能：**
+- 封装数据库操作
+- 提供业务逻辑验证
+- 配置同步和验证
+- 运行时配置管理
+
+**核心方法：**
+- `get(key)` - 获取单个配置
+- `getMultiple(keys)` - 获取多个配置
+- `getByCategory(category)` - 按分类获取配置
+- `getAllPublic()` - 获取所有公开配置
+- `set(info)` - 设置配置
+- `setMultiple(infos)` - 批量设置配置
+- `delete(key)` - 删除配置
+- `syncConfig(config)` - 同步配置文件
+- `validateConfig()` - 验证配置完整性
+- `getRuntimeConfig()` - 获取运行时配置
+- `getConfigMap()` - 获取配置映射
+
 ## 模块说明
 
 ### `database/` - 数据库模块
@@ -119,6 +165,8 @@ S3 兼容对象存储客户端。
 ## 架构设计
 
 ### 数据流
+
+#### 资产签名流程
 1. **请求到达** → `server.ts` 接收 HTTP 请求
 2. **路由分发** → `assetSignRoute.ts` 处理资产相关请求
 3. **资产查询** → `assetRegistry.ts` 查询数据库
@@ -126,11 +174,20 @@ S3 兼容对象存储客户端。
 5. **URL 签名** → `s3Client.ts` 生成预签名 URL
 6. **响应返回** → 返回 JSON 响应
 
+#### 服务器信息流程
+1. **请求到达** → `server.ts` 接收 HTTP 请求
+2. **路由分发** → `serverInfoRoute.ts` 处理服务器信息请求
+3. **服务调用** → `serverInfoService.ts` 执行业务逻辑
+4. **数据库操作** → `database/serverInfo.ts` 查询/更新数据
+5. **响应返回** → 返回 JSON 响应
+
 ### 依赖关系
 ```
 server.ts → assetSignRoute.ts → assetRegistry.ts → database/
-                                         ↓
-                                    s3Client.ts → storage/
+         ↓                              ↓
+serverInfoRoute.ts → serverInfoService.ts → database/serverInfo.ts
+         ↓
+    s3Client.ts → storage/
 ```
 
 ## 错误处理

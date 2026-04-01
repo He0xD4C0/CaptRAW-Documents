@@ -1,5 +1,7 @@
 # CaptRAW Documents 后端服务
 
+*最后更新：2024年4月*
+
 ## 概述
 
 CaptRAW Documents 后端服务是一个基于 Express.js 的 Node.js 应用，提供以下核心功能：
@@ -18,16 +20,21 @@ backend/
 ├── src/
 │   ├── config.ts          # 配置管理
 │   ├── server.ts          # Express 应用入口
+│   ├── serverInfoRoute.ts # 服务器信息路由
 │   ├── database/          # 数据库模块
-│   │   └── index.ts       # PostgreSQL 连接和查询
+│   │   └── index.ts       # PostgreSQL 连接池和查询
 │   ├── storage/           # 存储模块
 │   │   └── s3Client.ts    # S3 兼容存储客户端
 │   ├── assetRegistry.ts   # 资产注册表（数据库查询）
 │   ├── assetSignRoute.ts  # 资产签名路由
-│   └── assetMockMap.ts    # 模拟资产映射（开发用）
+│   └── services/          # 业务服务
+│       └── serverInfoService.ts # 服务器信息服务
 ├── scripts/
-│   └── upload-assets.ts   # 资产上传脚本
+│   ├── upload-assets.ts   # 资产上传脚本
+│   ├── reset-db.ts        # 数据库重置脚本
+│   └── seed-db.ts         # 数据库种子脚本
 ├── init-db.sql           # 数据库初始化脚本
+├── seed-data.sql         # 种子数据脚本
 └── package.json
 ```
 

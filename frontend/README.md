@@ -5,89 +5,121 @@
 
 ## 已完成的功能
 
-### 第1天：项目初始化与基础架构 ✅
-- [x] 创建项目结构
-- [x] 初始化React TypeScript项目
-- [x] 安装核心依赖：
-  - react-router-dom
-  - axios
-  - @tanstack/react-query
-  - tailwindcss v4
-  - postcss
-  - autoprefixer
-- [x] 配置Tailwind CSS v4
-- [x] 创建项目目录结构
+### ✅ 项目基础架构
+- 完整的monorepo项目结构
+- React 19 + TypeScript开发环境
+- Tailwind CSS v3.4样式系统
+- 模块化的API服务架构
+- 统一的YAML配置管理
 
-### 第2天：布局组件开发 ✅
-- [x] 创建Layout组件
-- [x] 创建Header组件
-  - 基于伪代码实现导航栏
-  - 深色/浅色主题切换按钮
-  - 用户头像下拉菜单
-  - 响应式设计
-- [x] 创建Footer组件
-  - 页脚内容
-  - 版权信息
-  - 社区链接
-- [x] 创建主题切换功能
-  - 主题上下文
-  - 本地存储主题偏好
+### ✅ 布局系统
+- Layout组件（Header + Footer + 主内容区）
+- Header组件：导航栏、主题切换、用户菜单
+- Footer组件：版权信息、社区链接
+- 响应式设计，支持移动端和桌面端
+- 深色/浅色主题系统，支持系统主题检测
 
-### 第3天：主页组件开发 ✅
-- [x] 创建HomePage组件
-- [x] 创建BannerCarousel组件
-  - 自动轮播（3秒）
-  - 左右翻页按钮
-  - 横幅卡片
-  - 支持暂停轮播
-- [x] 创建NoticeBoard组件
-  - 公告卡片列表
-  - 用户头像显示
-  - 点击跳转
-  - 懒加载功能
-- [x] 创建ArticleTimeline组件
-  - 文章卡片网格
-  - 分页加载
-  - 标签显示
-  - 懒加载功能
+### ✅ 主页功能模块
+- HomePage：集成所有主页组件
+- BannerCarousel：自动轮播（3秒间隔）、手动控制、暂停功能
+- NoticeBoard：公告列表、用户头像显示、懒加载
+- ArticleTimeline：文章卡片网格、分页加载、标签显示
+
+### ✅ 配置管理系统
+- 运行时配置加载（window.runtimeConfig）
+- 类型安全的配置访问（runtimeConfig.ts）
+- URL配置管理（urls.ts）
+- 配置同步脚本（scripts/sync-config.js）
+- ConfigGate组件：配置加载状态管理
+
+### ✅ 数据层和服务架构
+- 模块化API服务（articleService, noticeService, bannerService等）
+- 基础服务类（BaseService）
+- React Query集成，支持缓存和状态管理
+- 自定义Hooks（useArticles, useAssetUrl, useBanners等）
+
+### ✅ UI组件库
+- AssetImage：智能资产图片组件，支持签名URL和占位图
+- ThemeToggle：主题切换按钮
+- UserAvatar：用户头像组件，支持联邦用户名显示
+- 文章卡片组件（ArticleCard）
+
+### ✅ 资产管理系统
+- 资产URL工具函数（assetUrl.ts）
+- 支持签名URL和公共URL两种策略
+- 开发模式占位图支持
+- 与后端资产签名服务集成
 
 ## 技术栈
-- **前端框架**: React 18 + TypeScript
-- **路由**: React Router DOM
-- **样式**: Tailwind CSS v4
-- **状态管理**: React Query (TanStack Query)
-- **构建工具**: Create React App
-- **HTTP客户端**: Axios
+- **前端框架**: React 19.2.4 + TypeScript 4.9.5
+- **路由**: React Router DOM 7.13.2
+- **状态管理**: @tanstack/react-query 5.95.2
+- **样式**: Tailwind CSS 3.4.19
+- **HTTP客户端**: Axios 1.14.0
+- **构建工具**: Create React App 5.0.1
+- **配置管理**: js-yaml 4.1.1
+- **测试**: React Testing Library, Jest
 
 ## 项目结构
 ```
 frontend/
 ├── src/
 │   ├── components/
-│   │   ├── layout/
+│   │   ├── layout/           # 布局组件
 │   │   │   ├── Layout.tsx
 │   │   │   ├── Header.tsx
 │   │   │   └── Footer.tsx
-│   │   ├── ui/
+│   │   ├── ui/              # 通用UI组件
+│   │   │   ├── AssetImage.tsx
 │   │   │   ├── ThemeToggle.tsx
 │   │   │   └── UserAvatar.tsx
-│   │   └── home/
-│   │       ├── BannerCarousel.tsx
-│   │       ├── NoticeBoard.tsx
-│   │       └── ArticleTimeline.tsx
-│   ├── pages/
+│   │   ├── home/            # 主页组件
+│   │   │   ├── BannerCarousel.tsx
+│   │   │   ├── NoticeBoard.tsx
+│   │   │   └── ArticleTimeline.tsx
+│   │   ├── articles/        # 文章组件
+│   │   │   └── ArticleCard.tsx
+│   │   └── shared/          # 共享组件（预留）
+│   ├── pages/              # 页面组件
 │   │   └── HomePage.tsx
-│   ├── hooks/
-│   ├── services/
-│   ├── utils/
-│   ├── types/
-│   ├── assets/
-│   ├── App.tsx
+│   ├── hooks/              # 自定义Hooks
+│   │   ├── useArticles.ts
+│   │   ├── useAssetUrl.ts
+│   │   ├── useBanners.ts
+│   │   ├── useNotices.ts
+│   │   └── useTags.ts
+│   ├── services/           # API服务
+│   │   ├── baseService.ts
+│   │   ├── articleService.ts
+│   │   ├── noticeService.ts
+│   │   ├── bannerService.ts
+│   │   ├── tagService.ts
+│   │   ├── authService.ts
+│   │   ├── fileService.ts
+│   │   ├── api.ts
+│   │   └── index.ts
+│   ├── config/             # 配置模块
+│   │   ├── runtimeConfig.ts
+│   │   └── urls.ts
+│   ├── data/               # 静态数据
+│   │   ├── articles.json
+│   │   ├── banners.json
+│   │   ├── notices.json
+│   │   └── assetMockMap.ts
+│   ├── types/              # TypeScript类型定义
+│   │   └── index.ts
+│   ├── utils/              # 工具函数
+│   │   └── assetUrl.ts
+│   ├── App.tsx             # 应用根组件
+│   ├── App.css
+│   ├── index.tsx           # 入口文件
 │   └── index.css
-├── public/
-├── tailwind.config.js
-├── postcss.config.js
-└── package.json
+├── public/                 # 静态资源
+├── scripts/                # 构建脚本
+│   └── sync-config.js      # 配置同步脚本
+├── tailwind.config.js      # Tailwind配置
+├── postcss.config.js       # PostCSS配置
+└── package.json            # 依赖配置
 ```
 
 ## 运行项目
@@ -134,29 +166,35 @@ npm test
 
 ## 下一步计划
 
-### 第4天：文章相关页面
-- [ ] 创建ArticlePage组件
-- [ ] 创建ArticleCard组件
-- [ ] 创建MarkdownRenderer组件
-- [ ] 创建CommentSection组件
+### 文章系统
+- [ ] ArticlePage：文章详情页面，支持Markdown渲染
+- [ ] ArticleListPage：文章列表页面，支持筛选和排序
+- [ ] MarkdownRenderer：Markdown渲染组件，支持语法高亮
+- [ ] CommentSection：评论组件，支持嵌套评论和反应
 
-### 第5天：用户认证页面
-- [ ] 创建LoginPage组件
-- [ ] 创建RegisterPage组件
-- [ ] 创建ProfilePage组件
-- [ ] 创建SettingsPage组件
+### 用户认证
+- [ ] LoginPage：登录页面，支持OAuth2
+- [ ] RegisterPage：注册页面
+- [ ] ProfilePage：用户个人资料页面
+- [ ] SettingsPage：用户设置页面
 
-### 第6天：管理页面
-- [ ] 创建AdminDashboard组件
-- [ ] 创建ArticleManagement组件
-- [ ] 创建NoticeManagement组件
-- [ ] 创建BannerManagement组件
+### 搜索和发现
+- [ ] SearchPage：搜索页面，支持全文搜索
+- [ ] DirectoryPage：目录页面，按分类浏览
+- [ ] TagPage：标签页面，显示标签相关文章
 
-### 第7天：投稿与搜索功能
-- [ ] 创建SubmitArticlePage组件
-- [ ] 创建DirectoryPage组件
-- [ ] 创建SearchPage组件
-- [ ] 创建404页面和加载状态
+### 管理功能
+- [ ] AdminDashboard：管理员仪表板
+- [ ] ArticleManagement：文章管理界面
+- [ ] UserManagement：用户管理界面
+- [ ] ContentManagement：内容管理界面
+
+### 增强功能
+- [ ] 404页面和错误处理
+- [ ] 加载状态和骨架屏
+- [ ] 离线支持
+- [ ] PWA功能
+- [ ] 多语言支持
 
 ## 开发规范
 - 使用TypeScript进行类型检查

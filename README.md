@@ -26,26 +26,31 @@ Below is a precise English translation of your document, preserving structure an
 
 ## 📊 Project Status
 
-* **Current Version**: v0.4.0-beta
-* **Development Phase**: Phase 1 – Frontend Development (75% complete) + Backend Foundation
-* **Last Updated**: March 31, 2026
+* **Current Version**: v0.5.0
+* **Development Phase**: Phase 1 – Frontend Development (90% complete) + Backend Foundation (80% complete)
+* **Last Updated**: April 2024
 
 ### ✅ Completed Features
 
-1. **Project Foundation** – Complete structure and development environment
-2. **Layout System** – Header, Footer, and Layout components
-3. **Homepage Features** – Banner carousel, bulletin board, article timeline
-4. **Configuration System** – Secure configuration management and unified resource handling
-5. **Data Layer** – API services and data management
-6. **Backend Foundation** – Database, object storage, and asset management
-7. **Project Documentation** – Complete module documentation and progress reports
+1. **Project Foundation** – Complete monorepo structure and development environment
+2. **Layout System** – Header, Footer, Layout components with responsive design
+3. **Homepage Features** – BannerCarousel (auto-rotating), NoticeBoard, ArticleTimeline with pagination
+4. **Configuration System** – Secure YAML configuration with frontend runtime loading
+5. **Data Layer** – Modular API services (articles, banners, notices, tags, auth, files)
+6. **Backend Foundation** – PostgreSQL database, MinIO/S3 object storage, asset signing service
+7. **Asset Management** – Signed URL generation, asset registry with database fallback
+8. **UI Components** – AssetImage, ThemeToggle, UserAvatar with federation support
+9. **Custom Hooks** – useArticles, useAssetUrl, useBanners, useNotices, useTags
+10. **Project Documentation** – Complete module documentation across all directories
 
 ### 🚧 Features in Progress
 
-1. **Article Detail Page** – Content rendering and Markdown support
-2. **Comment System** – Article interaction and discussion
-3. **User Authentication** – Login, registration, profile pages
-4. **Admin Dashboard** – Administrative control panel
+1. **Article Detail Page** – Markdown rendering with syntax highlighting
+2. **Comment System** – Nested comments with reactions
+3. **User Authentication** – Login, registration, OAuth2 integration
+4. **Admin Dashboard** – Article, user, and content management
+5. **Search Functionality** – Full-text search with filters
+6. **API Documentation** – OpenAPI/Swagger specification
 
 ---
 
@@ -60,15 +65,17 @@ Below is a precise English translation of your document, preserving structure an
 * **HTTP Client**: Axios 1.14.0
 * **Build Tool**: Create React App 5.0.1
 * **Configuration**: js-yaml 4.1.1
+* **Testing**: React Testing Library, Jest
 
-### Backend (Partially Implemented)
+### Backend
 
 * **Runtime**: Node.js + Express 5.2.1
-* **Database**: PostgreSQL + pg 8.20.0
-* **Object Storage**: @aws-sdk/client-s3 (S3 compatible)
-* **Asset Management**: Signed URL generation and asset registry
-* **Database Operations**: Connection pooling, transactions, CRUD operations
-* **Configuration**: Unified YAML configuration with environment variables
+* **Database**: PostgreSQL 16 + pg 8.20.0
+* **Object Storage**: @aws-sdk/client-s3 (S3 compatible, MinIO support)
+* **Asset Management**: Signed URL generation with expiry, asset registry
+* **Database Operations**: Connection pooling, transactions, health checks
+* **Configuration**: Unified YAML configuration with environment variable overrides
+* **Containerization**: Docker Compose for development environment
 
 ---
 
@@ -130,23 +137,49 @@ CaptRAW-Documents/
    cd CaptRAW-Documents
    ```
 
-2. **Install frontend dependencies**
+2. **Install dependencies**
 
    ```bash
+   # Frontend dependencies
    cd frontend
+   npm install
+   
+   # Backend dependencies
+   cd ../backend
    npm install
    ```
 
-3. **Create configuration file**
+3. **Start infrastructure services**
 
    ```bash
-   cp config.example.yaml config.yaml
-   nano config.yaml
+   # Start PostgreSQL and MinIO using Docker Compose
+   docker-compose up -d
    ```
 
-4. **Start development server**
+4. **Initialize the database**
 
    ```bash
+   # Run database initialization
+   cd backend
+   npm run seed-db
+   ```
+
+5. **Upload sample assets**
+
+   ```bash
+   # Upload sample images to object storage
+   npm run upload-assets
+   ```
+
+6. **Start development servers**
+
+   ```bash
+   # Terminal 1: Backend server
+   cd backend
+   npm run dev
+   
+   # Terminal 2: Frontend server
+   cd frontend
    npm start
    ```
 
@@ -315,25 +348,29 @@ Thanks to all contributors who helped build this project.
 
 | Phase                               | Status         | Progress |
 | ----------------------------------- | -------------- | -------- |
-| Phase 1: Frontend Development       | 🟢 In Progress | 75%      |
-| Phase 2: Backend Foundation         | 🟢 In Progress | 70%      |
-| Phase 3: Article System             | ⚪ Not Started  | 0%       |
-| Phase 4: User Authentication        | ⚪ Not Started  | 0%       |
+| Phase 1: Frontend Foundation        | 🟢 In Progress | 90%      |
+| Phase 2: Backend Foundation         | 🟢 In Progress | 80%      |
+| Phase 3: Article System             | ⚪ Not Started  | 10%      |
+| Phase 4: User Authentication        | ⚪ Not Started  | 5%       |
 | Phase 5: Admin & Management         | ⚪ Not Started  | 0%       |
-| Phase 6: Testing & Deployment       | ⚪ Not Started  | 0%       |
+| Phase 6: Testing & Deployment       | ⚪ Not Started  | 15%      |
 
 ### Detailed Progress
 
-* ✅ Phase 1: Initialization & Architecture (100%)
-* ✅ Phase 2: Layout Components (100%)
-* ✅ Phase 3: Homepage Components (100%)
-* ✅ Phase 4: Configuration System (100%)
-* ✅ Phase 5: Data Layer & API Services (100%)
-* ✅ Phase 6: Project Documentation & Cleanup (100%)
-* 🟡 Phase 7: Backend Foundation (70%)
-* ⚪ Phase 8: Article Pages (Pending)
-* ⚪ Phase 9: Authentication System (Pending)
-* ⚪ Phase 10: Admin Panel (Pending)
+* ✅ Phase 1: Project Initialization & Architecture (100%)
+* ✅ Phase 2: Frontend Layout Components (100%)
+* ✅ Phase 3: Homepage Components (BannerCarousel, NoticeBoard, ArticleTimeline) (100%)
+* ✅ Phase 4: Configuration System (YAML config with runtime loading) (100%)
+* ✅ Phase 5: Data Layer & Modular API Services (100%)
+* ✅ Phase 6: Asset Management System (Signed URLs, asset registry) (100%)
+* ✅ Phase 7: Backend Foundation (PostgreSQL, MinIO, asset signing) (100%)
+* ✅ Phase 8: Project Documentation & Code Organization (100%)
+* 🟡 Phase 9: Development Infrastructure (Docker Compose, scripts) (90%)
+* ⚪ Phase 10: Article Detail Pages & Markdown Rendering (10%)
+* ⚪ Phase 11: User Authentication System (5%)
+* ⚪ Phase 12: Search & Filtering Functionality (0%)
+* ⚪ Phase 13: Admin Dashboard & Management (0%)
+* ⚪ Phase 14: Testing & Deployment Pipeline (15%)
 
 ---
 
