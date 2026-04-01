@@ -10,8 +10,6 @@ assets:
   sign:
     mode: "real"
     expiresSeconds: 300
-  # 后端兼容字段（便于在 config 中快速切换）
-  signMode: "real"
 
 community:
   # Misskey / Fediverse 社区地址
@@ -29,5 +27,5 @@ objectStorage:
 
 database:
   # 仅后端使用；前端不会读取这一节
-  url: "postgresql://user:password@localhost:5432/captraw_docs"
+  url: "postgresql://captraw_user:captraw_password@localhost:5432/captraw_db"
 

@@ -8,7 +8,9 @@
     "build": "tsc -p tsconfig.json",
     "start": "node dist/server.js",
     "upload-assets": "ts-node scripts/upload-assets.ts",
-    "test-db": "ts-node -e \"import { healthCheck } from './src/database'; healthCheck().then(ok => console.log(ok ? '✅ Database OK' : '❌ Database Failed')).catch(e => console.error(e));\""
+    "test-db": "ts-node -e \"import { healthCheck } from './src/database'; healthCheck().then(ok => console.log(ok ? '✅ Database OK' : '❌ Database Failed')).catch(e => console.error(e));\"",
+    "reset-db": "ts-node scripts/reset-db.ts",
+    "seed-db": "ts-node scripts/seed-db.ts"
   },
   "keywords": [],
   "author": "",

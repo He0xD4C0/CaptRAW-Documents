@@ -1,6 +1,7 @@
 import { AssetKind } from './config';
+import { findAsset } from './database';
 
-interface AssetRecord {
+export interface AssetRecord {
   kind: AssetKind;
   uuid: string;
   visibility: 'public' | 'private';
@@ -9,8 +10,9 @@ interface AssetRecord {
   hostname?: string;
 }
 
-// 模拟数据库记录：后续可替换为真实 DB 查询
-const ASSET_REGISTRY: AssetRecord[] = [
+// 临时兼容层：从数据库查询资产记录
+// 数据库没有记录时回退到硬编码数据（迁移期间）
+const LEGACY_ASSET_REGISTRY: AssetRecord[] = [
   { kind: 'user', uuid: 'user_menu_avatar', visibility: 'public', username: 'He0xD4C0', hostname: 'hub.captraw.com' },
   { kind: 'user', uuid: 'current_user_avatar', visibility: 'public', ownerId: 'current_user', username: 'He0xD4C0', hostname: 'hub.captraw.com' },
   { kind: 'user', uuid: 'new_user_avatar', visibility: 'public', ownerId: 'new_user', username: 'new_user', hostname: 'hub.captraw.com' },
@@ -34,8 +36,23 @@ const ASSET_REGISTRY: AssetRecord[] = [
   { kind: 'notice', uuid: 'notice_7_author_avatar', visibility: 'public' },
 ];
 
-export function findAssetRecord(kind: AssetKind, uuid: string): AssetRecord | undefined {
-  return ASSET_REGISTRY.find((item) => item.kind === kind && item.uuid === uuid);
+export async function findAssetRecord(kind: AssetKind, uuid: string): Promise<AssetRecord | undefined> {
+  // 1. 优先查询数据库
+  const dbRecord = await findAsset(kind, uuid);
+  if (dbRecord) {
+    return {
+      kind: dbRecord.kind as AssetKind,
+      uuid: dbRecord.uuid,
+      visibility: dbRecord.visibility as 'public' | 'private',
+      ownerId: dbRecord.owner_id || undefined,
+      username: dbRecord.username || undefined,
+      hostname: dbRecord.hostname || undefined,
+    };
+  }
+  
+  // 2. 回退到硬编码数据（迁移期间）
+  console.warn(`Asset not found in database: ${kind}/${uuid}, falling back to legacy registry`);
+  return LEGACY_ASSET_REGISTRY.find((item) => item.kind === kind && item.uuid === uuid);
 }
 
 export function canAccessAsset(record: AssetRecord, userId?: string): boolean {

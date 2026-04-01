@@ -76,7 +76,7 @@ export function getConfig(): BackendConfig {
     assets: {
       publicBaseUrl: raw?.assets?.publicBaseUrl || DEFAULT_CONFIG.assets.publicBaseUrl,
       sign: {
-        mode: raw?.assets?.signMode || raw?.assets?.sign?.mode || DEFAULT_CONFIG.assets.sign.mode,
+        mode: raw?.assets?.sign?.mode || DEFAULT_CONFIG.assets.sign.mode,
         expiresSeconds:
           raw?.assets?.sign?.expiresSeconds || DEFAULT_CONFIG.assets.sign.expiresSeconds,
       },
