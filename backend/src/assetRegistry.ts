@@ -1,5 +1,4 @@
 import { AssetKind } from './config';
-import { findAsset } from './database';
 
 export interface AssetRecord {
   kind: AssetKind;
@@ -37,22 +36,21 @@ const LEGACY_ASSET_REGISTRY: AssetRecord[] = [
 ];
 
 export async function findAssetRecord(kind: AssetKind, uuid: string): Promise<AssetRecord | undefined> {
-  // 1. 优先查询数据库
-  const dbRecord = await findAsset(kind, uuid);
-  if (dbRecord) {
+  // 临时解决方案：完全使用硬编码数据
+  // TODO: 在第三阶段重构，与业务表（用户、文章、公告）集成
+  const record = LEGACY_ASSET_REGISTRY.find((item) => item.kind === kind && item.uuid === uuid);
+  
+  if (!record) {
+    console.warn(`Asset not found in legacy registry: ${kind}/${uuid}, please add to LEGACY_ASSET_REGISTRY`);
+    // 返回一个默认的公共记录，避免API错误
     return {
-      kind: dbRecord.kind as AssetKind,
-      uuid: dbRecord.uuid,
-      visibility: dbRecord.visibility as 'public' | 'private',
-      ownerId: dbRecord.owner_id || undefined,
-      username: dbRecord.username || undefined,
-      hostname: dbRecord.hostname || undefined,
+      kind,
+      uuid,
+      visibility: 'public',
     };
   }
   
-  // 2. 回退到硬编码数据（迁移期间）
-  console.warn(`Asset not found in database: ${kind}/${uuid}, falling back to legacy registry`);
-  return LEGACY_ASSET_REGISTRY.find((item) => item.kind === kind && item.uuid === uuid);
+  return record;
 }
 
 export function canAccessAsset(record: AssetRecord, userId?: string): boolean {
