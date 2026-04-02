@@ -3,6 +3,9 @@ import cors from 'cors';
 import { getConfig } from './config';
 import { createAssetSignRouter } from './assetSignRoute';
 import { createServerInfoRouter } from './serverInfoRoute';
+import { createArticleRouter } from './articleRoute';
+import { createAuthRouter } from './authRoute';
+import { createBannerRouter } from './bannerRoute';
 
 const app = express();
 const cfg = getConfig();
@@ -16,6 +19,9 @@ app.get('/health', (_req, res) => {
 
 app.use('/api/assets', createAssetSignRouter());
 app.use('/api/server-info', createServerInfoRouter());
+app.use('/api/articles', createArticleRouter());
+app.use('/api/auth', createAuthRouter());
+app.use('/api/banners', createBannerRouter());
 
 app.listen(cfg.api.port, () => {
   // eslint-disable-next-line no-console

@@ -24,31 +24,37 @@
 
 ## 📊 Project Status
 
-* **Current Version**: v0.5.0
-* **Development Phase**: Phase 1 – Frontend Development (90% complete) + Backend Foundation (80% complete)
-* **Last Updated**: April 2024
+* **Current Version**: v0.6.0
+* **Development Phase**: Phase 2 – Real Database Integration (Day 1 completed)
+* **Last Updated**: April 2026 (Stage 2, Day 2 in progress)
 
 ### ✅ Completed Features
 
 1. **Project Foundation** – Complete monorepo structure and development environment
 2. **Layout System** – Header, Footer, Layout components with responsive design
 3. **Homepage Features** – BannerCarousel (auto-rotating), NoticeBoard, ArticleTimeline with pagination
-4. **Configuration System** – Secure YAML configuration with frontend runtime loading
+4. **Configuration System** – Secure YAML configuration with frontend runtime loading + database-backed dynamic configuration
 5. **Data Layer** – Modular API services (articles, banners, notices, tags, auth, files)
 6. **Backend Foundation** – PostgreSQL database, MinIO/S3 object storage, asset signing service
 7. **Asset Management** – Signed URL generation, asset registry with database fallback
 8. **UI Components** – AssetImage, ThemeToggle, UserAvatar with federation support
 9. **Custom Hooks** – useArticles, useAssetUrl, useBanners, useNotices, useTags
 10. **Project Documentation** – Complete module documentation across all directories
+11. **Real Database Architecture** – Complete business tables (users, articles, announcements, banners, server_info)
+12. **Server Information System** – Dynamic configuration management with public/private controls
+13. **Real API Endpoints** – Article, Banner, and Authentication APIs with full CRUD operations
+14. **Database Management Tools** – Reset, seed, and migration scripts
+15. **Federal Identity Support** – Fediverse user ID integration in user table
 
 ### 🚧 Features in Progress
 
-1. **Article Detail Page** – Markdown rendering with syntax highlighting
-2. **Comment System** – Nested comments with reactions
-3. **User Authentication** – Login, registration, OAuth2 integration
-4. **Admin Dashboard** – Article, user, and content management
-5. **Search Functionality** – Full-text search with filters
-6. **API Documentation** – OpenAPI/Swagger specification
+1. **Frontend Service Layer Refactoring** – Removing mock data, switching to real API calls (Day 2 task)
+2. **Article Detail Page** – Markdown rendering with syntax highlighting
+3. **Comment System** – Nested comments with reactions
+4. **User Authentication Frontend** – Login, registration pages (Day 4 task)
+5. **Admin Dashboard** – Article, user, and content management
+6. **Search Functionality** – Full-text search with filters
+7. **API Documentation** – OpenAPI/Swagger specification
 
 ---
 
@@ -101,9 +107,24 @@ CaptRAW-Documents/
 ├── backend/                    # Backend project (Node.js + Express + TypeScript)
 │   ├── src/
 │   │   ├── database/          # Database module (PostgreSQL connection pool)
+│   │   │   ├── index.ts      # Database connection and query utilities
+│   │   │   ├── articles.ts   # Article database operations
+│   │   │   ├── users.ts      # User database operations
+│   │   │   ├── banners.ts    # Banner database operations
+│   │   │   └── serverInfo.ts # Server info database operations
+│   │   ├── services/         # Business logic services
+│   │   │   ├── articleService.ts
+│   │   │   ├── authService.ts
+│   │   │   ├── bannerService.ts
+│   │   │   └── serverInfoService.ts
+│   │   ├── routes/          # API route handlers
+│   │   │   ├── articleRoute.ts
+│   │   │   ├── authRoute.ts
+│   │   │   ├── bannerRoute.ts
+│   │   │   ├── assetSignRoute.ts
+│   │   │   └── serverInfoRoute.ts
 │   │   ├── storage/           # Storage module (S3 compatible client)
 │   │   ├── assetRegistry.ts   # Asset registry with database fallback
-│   │   ├── assetSignRoute.ts  # Asset signing route handler
 │   │   ├── config.ts          # Configuration management
 │   │   └── server.ts          # Express server
 │   ├── scripts/                # Utility scripts (asset upload)
@@ -346,29 +367,73 @@ Thanks to all contributors who helped build this project.
 
 | Phase                               | Status         | Progress |
 | ----------------------------------- | -------------- | -------- |
-| Phase 1: Frontend Foundation        | 🟢 In Progress | 90%      |
-| Phase 2: Backend Foundation         | 🟢 In Progress | 80%      |
-| Phase 3: Article System             | ⚪ Not Started  | 10%      |
-| Phase 4: User Authentication        | ⚪ Not Started  | 5%       |
-| Phase 5: Admin & Management         | ⚪ Not Started  | 0%       |
-| Phase 6: Testing & Deployment       | ⚪ Not Started  | 15%      |
+| Phase 1: Frontend Foundation        | ✅ Completed   | 100%     |
+| Phase 2: Backend Foundation         | ✅ Completed   | 100%     |
+| Phase 3: Real API Integration       | 🟡 In Progress | 50%      |
+| Phase 4: Frontend Service Refactor  | 🟡 In Progress | 20%      |
+| Phase 5: Article Detail Pages       | ⚪ Not Started  | 10%      |
+| Phase 6: User Authentication        | ⚪ Not Started  | 20%      |
+| Phase 7: Admin & Management         | ⚪ Not Started  | 0%       |
+| Phase 8: Testing & Deployment       | ⚪ Not Started  | 15%      |
 
-### Detailed Progress
+### Detailed Progress (Phase 2 - Real Database Integration)
 
-* ✅ Phase 1: Project Initialization & Architecture (100%)
-* ✅ Phase 2: Frontend Layout Components (100%)
-* ✅ Phase 3: Homepage Components (BannerCarousel, NoticeBoard, ArticleTimeline) (100%)
-* ✅ Phase 4: Configuration System (YAML config with runtime loading) (100%)
-* ✅ Phase 5: Data Layer & Modular API Services (100%)
-* ✅ Phase 6: Asset Management System (Signed URLs, asset registry) (100%)
-* ✅ Phase 7: Backend Foundation (PostgreSQL, MinIO, asset signing) (100%)
-* ✅ Phase 8: Project Documentation & Code Organization (100%)
-* 🟡 Phase 9: Development Infrastructure (Docker Compose, scripts) (90%)
-* ⚪ Phase 10: Article Detail Pages & Markdown Rendering (10%)
-* ⚪ Phase 11: User Authentication System (5%)
-* ⚪ Phase 12: Search & Filtering Functionality (0%)
-* ⚪ Phase 13: Admin Dashboard & Management (0%)
-* ⚪ Phase 14: Testing & Deployment Pipeline (15%)
+* ✅ Phase 2, Day 1: Real Database Architecture (100%)
+  - Complete business tables with foreign key relationships
+  - UUID-based primary keys for all entities
+  - Federal identity support in user table
+
+* ✅ Phase 2, Day 1: Server Information System (100%)
+  - Dynamic configuration storage in database
+  - Public/private configuration controls
+  - Runtime configuration API for frontend
+
+* ✅ Phase 2, Day 1: Article API Implementation (100%)
+  - Complete CRUD operations for articles
+  - Search, filtering, and pagination
+  - Author information joining
+
+* ✅ Phase 2, Day 1: Banner API Implementation (100%)
+  - Active banner filtering by date
+  - Display order management
+  - Admin management endpoints
+
+* ✅ Phase 2, Day 1: Authentication API Implementation (100%)
+  - User registration and login
+  - JWT token generation (basic)
+  - Federal user identity support
+
+* 🟡 Phase 2, Day 2: Frontend Service Layer Refactoring (0%)
+  - Remove mock data and simulateDelay
+  - Connect to real API endpoints
+  - Update error handling and retry logic
+
+* ⚪ Phase 2, Day 3: Article Detail Page Implementation (0%)
+  - Article page component
+  - Markdown rendering
+  - Comment system foundation
+
+* ⚪ Phase 2, Day 4: User Authentication Frontend (0%)
+  - Login and registration pages
+  - Profile management
+  - JWT token handling
+
+### Phase 2 Completion Goals (7-Day Plan)
+
+**✅ Completed (April 1-2):**
+1. Real database architecture and business tables
+2. Server information configuration system
+3. Complete backend API endpoints (articles, banners, auth)
+4. Database management scripts
+
+**🔄 In Progress (April 2):**
+1. Frontend service layer refactoring
+
+**📅 Upcoming (April 3-7):**
+1. Article detail pages
+2. User authentication frontend
+3. Testing and quality assurance
+4. Documentation and deployment preparation
 
 ---
 
